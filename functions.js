@@ -143,3 +143,77 @@ const multiplyBy=(num1)=>{
 }
 
 const multiplyByTwo=multiplyBy(2)
+
+// CLOSURE
+function a1(){
+    let grandpa='grandpa'
+    return function b(){
+       let father='father'
+       return function c(){
+           let son='son'
+           return `${grandpa}> ${father} >${son}`
+       }
+    }
+}
+a1()()()
+
+function boo(string){
+    return function(name){
+       return function (name2){
+        console.log(`${string} ${name}  ${name2}`)
+       }
+    }
+}
+boo('hi')('tim')('becca')
+
+// Exercise
+function callMeMaybe(){
+    const callMe='Hi! I am now here!'
+    setTimeout(()=>{
+        console.log(callMe)
+    },4000) 
+}
+callMeMaybe()
+
+// Memory Efficient
+function heavyDuty(index){
+    const bigArray=new Array(7000).fill(':joy:')
+    console.log('created!')
+    return bigArray[index]
+}
+heavyDuty(566)
+heavyDuty(566)
+heavyDuty(566)
+const getHeavyDuty=heavyDuty2()
+getHeavyDuty(564)
+getHeavyDuty(580)
+getHeavyDuty(509)
+
+function heavyDuty2(index){
+    const bigArray=new Array(7000).fill(':joy:')
+    console.log('created again!')
+    return function(index){
+        return bigArray[index]
+    }
+}
+// Encapsulation
+const makeNuclearButton=()=>{
+    let timeWithoutDistruction=0
+    const passTime=()=>{
+        timeWithoutDistruction++
+    }
+    const lunch=()=>{
+        timeWithoutDistruction=-1
+        return 'Boom'
+    }
+    const totalPeaceTime=()=>{
+        timeWithoutDistruction
+    }
+    setInterval(() => {
+        passTime
+    }, 100);
+    return {
+        lunch:lunch,
+        totalPeaceTime:totalPeaceTime
+    }
+}
