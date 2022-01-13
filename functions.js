@@ -217,3 +217,43 @@ const makeNuclearButton=()=>{
         totalPeaceTime:totalPeaceTime
     }
 }
+
+const ohno=makeNuclearButton()
+ohno.totalPeaceTime()
+// Exercise1
+let view
+function initialise() {
+    view='emoji'
+    console.log('view has been set')
+}
+initialise()
+initialise()
+initialise()
+initialise()
+console.log(view)
+// let's make it in such a way that the function can only be called ones using encapsulation in other to avoid bugs
+let view1
+function initialise1() {
+    let called=0
+    return function(){
+        if(called>0){
+            return
+        }else{
+            view1='emoji'
+            called++
+            console.log('view has been set')
+        }
+    }
+    
+}
+const startOnce=initialise1()
+startOnce()
+
+// Exercise2
+//easiest fix was changing var to let because of the block
+const array=[1,2,3,4]
+for(let i=0; i<array.length; i++){
+    setTimeout(()=>{
+        console.log('I am at the index' + 1)
+    },3000)
+}
