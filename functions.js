@@ -257,3 +257,92 @@ for(let i=0; i<array.length; i++){
         console.log('I am at the index' + 1)
     },3000)
 }
+// Prototypes
+const array=[]
+array.__proto__.__proto__
+array.toString()
+
+function q(){}
+q.__proto__.__proto__
+
+const obj3={}
+obj3.__proto__
+let dragon={
+    name:'Tanya',
+    fire:true,
+    fight(){
+        return 5
+    },
+    sing(){
+        if(this.fire){
+            return `I am ${this.name} the breather of fire`
+
+        }
+    }
+}
+
+let lizard={
+    name:'kiki',
+    fight(){
+        return 1
+    }
+}
+
+const singLizard=dragon.sing.bind(lizard)
+// even though we borrowed the method it will be undefined because lizard doesn't have fire 
+console.log(singLizard)
+
+// We can create a prpototype chain
+lizard.__proto__=dragon
+lizard.sing()
+
+for(let prop in lizard){
+    if(lizard.hasOwnProperty(prop)){
+        console.log(prop)
+    }
+    
+}
+
+const obj4={
+    name:'sally'
+}
+obj4.hasOwnProperty('name') //you get true because it has name as a property
+
+function t(){
+
+}
+t.hasOwnProperty('call') //false
+t.hasOwnProperty('bind') //false
+t.hasOwnProperty('apply') //false
+t.hasOwnProperty('name') //true, the name of the function is t
+
+function multiplyBy5(num){
+    return num*5
+}
+multiplyBy5.__proto__
+
+// Creating our own prototypes
+let human={
+    mortal:true
+}
+let socrates=Object.create(human)
+socrates.age=34
+console.log(socrates.mortal)
+
+// Exercises
+// create  a new method to have  .ladtYear() which shows the last year 'YYYY' format
+Date.prototype.lastYear=function(){
+    return this.getFullYear()-1
+}
+new Date('1900-10-10').lastYear()
+
+
+// modify .map() to print 'uo' at the end of each item
+Array.prototype.map=function(){
+    let arr=[]
+    for(let i=0; i<this.length; i++){
+        arr.push((this[i] +'uo'))
+    }
+    return arr
+}
+console.log([1,2,3].map())
